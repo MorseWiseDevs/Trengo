@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="trengo_tickets_count" invisible="1"/>
+                <button name="action_open_trengo_tickets"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-ticket"
+                        attrs="{'invisible': [('trengo_tickets_count', '=', 0)]}">
+                    <field name="trengo_tickets_count" widget="statinfo" string="Trengo Tickets"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="trengo_id"/>
+                <field name="instagram_username"/>
+                <field name="facebook_username"/>
+                <field name="telegram_username"/>
+                <field name="twitter_username"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
