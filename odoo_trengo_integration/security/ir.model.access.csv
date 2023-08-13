@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+trengo_ticket,access_trengo_ticket_user,model_trengo_ticket,base.group_user,1,1,1,1
+trengo_label,access_trengo_label_user,model_trengo_label,base.group_user,1,1,1,1

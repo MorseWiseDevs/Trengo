@@ -1,0 +1,192 @@
+<odoo>
+    <record id="action_trengo_ticket" model="ir.actions.act_window">
+        <field name="name">Trengo Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">trengo.ticket</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Trengo Ticket!
+            </p>
+        </field>
+    </record>
+
+    <record id="view_trengo_ticket_kanban" model="ir.ui.view">
+        <field name="name">trengo.ticket.kanban</field>
+        <field name="model">trengo.ticket</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_view">
+                <!--                <templates>-->
+                <!--                    <t t-name="kanban-box">-->
+                <!--                        <div t-attf-class="oe_kanban_global_click oe_kanban_card">-->
+                <!--                            <div class="o_kanban_record_top mb16">-->
+                <!--                                <field name="contact_id"/>-->
+                <!--                            </div>-->
+                <!--                            <div class="o_kanban_record_top mb16">-->
+                <!--                                <field name="trengo_id"/>-->
+                <!--                            </div>-->
+                <!--                            <div class="o_kanban_record_top mb16">-->
+                <!--                                <field name="label_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>-->
+                <!--                            </div>-->
+
+                <!--                        </div>-->
+                <!--                    </t>-->
+                <!--                </templates>-->
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="contact_id"/>
+                                    </strong>
+                                </div>
+                                <strong>
+                                    <field name="trengo_id"/>
+                                </strong>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left text-muted">
+                                    <span>
+                                        <field name="label_ids" widget="many2many_tags"
+                                               options="{'color_field': 'color'}"/>
+
+                                    </span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="state" widget="label_selection"
+                                           options="{'classes': {'open': 'default', 'closed': 'danger', 'assigned': 'success'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+
+
+            </kanban>
+        </field>
+    </record>
+
+    <record id="trengo_ticket_view_tree" model="ir.ui.view">
+        <field name="name">trengo.ticket.view.tree</field>
+        <field name="model">trengo.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Trengo Ticket">
+                <field name="contact_id"/>
+                <field name="trengo_id"/>
+                <field name="label_ids" widget="many2many_tags"
+                       options="{'color_field': 'color'}"/>
+                <!--                <field name="helpdesk_ticket_id" readonly="1"/>-->
+                <!--                <field name="repair_ticket_id" readonly="1"/>-->
+                <!--                <field name="lead_id" readonly="1"/>-->
+                <!--                <field name="is_helpdesk_button_visible" invisible="1"/>-->
+                <!--                <field name="is_create_lead_button_visible" invisible="1"/>-->
+                <!--                <field name="is_repair_button_visible" invisible="1"/>-->
+                <!--                <button name="action_create_helpdesk_ticket" type="object" string="Create Helpdesk Ticket"-->
+                <!--                        class="oe_highlight"-->
+                <!--                        attrs="{'invisible': ['|', ('is_helpdesk_button_visible','=', False), ('helpdesk_ticket_id', '!=', False)]}"/>-->
+                <!--                <button name="action_create_lead" type="object" string="Create Lead" class="oe_highlight"-->
+                <!--                        attrs="{'invisible': ['|', ('is_create_lead_button_visible','=', False), ('lead_id', '!=', False)]}"/>-->
+                <!--                <button name="action_create_repair_order" type="object" string="Create Repair Order"-->
+                <!--                        class="oe_highlight"-->
+                <!--                        attrs="{'invisible': ['|', ('is_repair_button_visible','=', False), ('repair_ticket_id', '!=', False)]}"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="trengo_ticket_view_form" model="ir.ui.view">
+        <field name="name">trengo.ticket.view.form</field>
+        <field name="model">trengo.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Trengo Ticket">
+
+                <header>
+                    <field name="helpdesk_ticket_id" invisible="1"/>
+                    <field name="repair_ticket_id" invisible="1"/>
+                    <field name="lead_id" invisible="1"/>
+                    <field name="is_helpdesk_button_visible" invisible="1"/>
+                    <field name="is_create_lead_button_visible" invisible="1"/>
+                    <field name="is_repair_button_visible" invisible="1"/>
+                    <button name="action_create_helpdesk_ticket" type="object" string="Create Helpdesk Ticket"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|', ('is_helpdesk_button_visible','=', False), ('helpdesk_ticket_id', '!=', False)]}"/>
+                    <button name="action_create_lead" type="object" string="Create Lead" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('is_create_lead_button_visible','=', False), ('lead_id', '!=', False)]}"/>
+                    <button name="action_create_repair_order" type="object" string="Create Repair Order"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|', ('is_repair_button_visible','=', False), ('repair_ticket_id', '!=', False)]}"/>
+                    <field name="state" widget="statusbar"/>
+
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_help_desk_ticket" type="object" icon="fa-info"
+                                attrs="{'invisible': [('helpdesk_ticket_id', '=', False)]}" class="oe_stat_button"
+                                string="Helpdesk">
+                        </button>
+                        <button name="action_view_lead" type="object" icon="fa-handshake-o"
+                                attrs="{'invisible': [('lead_id', '=', False)]}" class="oe_stat_button"
+                                string="Lead">
+                        </button>
+                        <button name="action_view_repair_ticket" type="object" icon="fa-gear"
+                                attrs="{'invisible': [('repair_ticket_id', '=', False)]}" class="oe_stat_button"
+                                string="Repair">
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <field name="is_spam" invisible="1"/>
+                        <widget
+                                name="web_ribbon"
+                                bg_color="bg-danger"
+                                title="Spam"
+                                attrs="{'invisible': [('is_spam', '=',False)]}"
+                        />
+                        <h1>
+
+                            <field name="name" readonly="1" placeholder="New"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <field name="contact_id"/>
+                        <field name="trengo_id"/>
+                        <field name="label_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_trengo_ticket_search" model="ir.ui.view">
+        <field name="name">trengo.ticket.search</field>
+        <field name="model">trengo.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Trengo Tickets">
+                <field name="name"/>
+                <field name="trengo_id"/>
+                <field name="state"/>
+                <field name="label_ids"/>
+                <field name="contact_id"/>
+                <field name="is_spam"/>
+                <filter name="closed" string="Open" domain="[('state', '=', 'open')]"/>
+                <filter name="open" string="Assigned" domain="[('state', '=', 'assigned')]"/>
+                <filter name="assigned" string="Closed" domain="[('state', '=', 'closed')]"/>
+                <filter name="spam" string="Spam" domain="[('is_spam', '=', True)]"/>
+                <filter name="not_spam" string="Not Spam" domain="[('is_spam', '=', False)]"/>
+                <filter name="state" context="{'group_by':'state'}"/>
+                <filter name="state" context="{'group_by':'label_ids'}"/>
+                <filter name="state" context="{'group_by':'contact_id'}"/>
+                <filter name="state" context="{'group_by':'is_spam'}"/>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="menu_trengo_ticket" action="action_trengo_ticket"
+              web_icon="odoo_trengo_integration,static/description/icon.png" name="Trengo"/>
+
+</odoo>
