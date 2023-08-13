@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_fetch_from_trengo" model="ir.cron">
+        <field name="name">Fetch profiles from Trengo</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">model.fetch_and_create_profiles_from_trengo()</field>
+        <field name="active">False</field>
+        <!--        <field name="interval_number">1</field>-->
+        <!--        <field name="interval_type">days</field>-->
+        <field name="numbercall">-1</field>
+    </record>
+    <record id="ir_cron_fetch_labels_from_trengo" model="ir.cron">
+        <field name="name">Fetch Labels from Trengo</field>
+        <field name="model_id" ref="model_trengo_label"/>
+        <field name="state">code</field>
+        <field name="code">model.fetch_and_create_labels_from_trengo()</field>
+        <field name="active">False</field>
+        <!--        <field name="interval_number">1</field>-->
+        <!--        <field name="interval_type">days</field>-->
+        <field name="numbercall">-1</field>
+    </record>
+    <record id="ir_cron_fetch_tickets_from_trengo" model="ir.cron">
+        <field name="name">Fetch Tickets from Trengo</field>
+        <field name="model_id" ref="model_trengo_ticket"/>
+        <field name="state">code</field>
+        <field name="code">model.fetch_and_create_tickets_from_trengo()</field>
+        <field name="active">False</field>
+        <!--        <field name="interval_number">1</field>-->
+        <!--        <field name="interval_type">days</field>-->
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

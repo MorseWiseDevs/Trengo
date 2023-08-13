@@ -1,0 +1,46 @@
+<odoo>
+    <record id="action_trengo_label" model="ir.actions.act_window">
+        <field name="name">Trengo Labels</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">trengo.label</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Trengo Label!
+            </p>
+        </field>
+    </record>
+
+    <record id="trengo_label_view_tree" model="ir.ui.view">
+        <field name="name">trengo.label.view.tree</field>
+        <field name="model">trengo.label</field>
+        <field name="arch" type="xml">
+            <tree string="Trengo Labels" editable="bottom">
+                <field name="trengo_id"/>
+                <field name="name"/>
+                <field name="object_to_create"/>
+                <field name="color" widget="color_picker" string="Color"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="trengo_label_view_form" model="ir.ui.view">
+        <field name="name">trengo.label.view.form</field>
+        <field name="model">trengo.label</field>
+        <field name="arch" type="xml">
+            <form string="Trengo Label">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="trengo_id"/>
+                            <field name="name"/>
+                            <field name="object_to_create"/></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_trengo_label" action="action_trengo_label" parent="odoo_trengo_integration.menu_trengo_ticket" sequence="2"/>
+
+</odoo>
