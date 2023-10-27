@@ -41,6 +41,7 @@
         </field>
     </record>
 
-    <menuitem id="menu_trengo_label" action="action_trengo_label" parent="odoo_trengo_integration.menu_trengo_ticket" sequence="2"/>
+    <menuitem id="menu_trengo_label" action="action_trengo_label" parent="odoo_trengo_integration.menu_trengo_ticket"
+              sequence="2"/>
 
 </odoo>

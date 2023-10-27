@@ -7,15 +7,8 @@ from odoo import http, _
 
 class AccountContactAPI(http.Controller):
 
-    # @http.route("/ticket/closed", type="http", auth="public", methods=["POST"], csrf=False)
-    # def create_contact(self, **data):
-    #     # request.env['res.partner'].sudo().fetch_and_create_profiles_from_trengo()
-    #     # request.env['trengo.label'].sudo().fetch_and_create_labels_from_trengo()
-    #     request.env['trengo.ticket'].sudo().fetch_and_create_tickets_from_trengo()
-
-    @http.route("/inbound/message", type="http", auth="none", methods=["POST"], csrf=False)
+    @http.route("/inbound/message", type="http", auth="user", methods=["POST"], csrf=False)
     def inbound_message(self, **data):
-        # request.env['res.partner'].sudo().with_user(1).fetch_and_create_profiles_from_trengo()
 
         ticket_object = request.env['trengo.ticket']
         profile_obj = request.env['res.partner']
@@ -37,6 +30,7 @@ class AccountContactAPI(http.Controller):
             trengo_contact = requests.get(endpoint, headers={"Authorization": f"Bearer {api_key}"})
 
             trengo_profile_id = trengo_contact.json().get('profile', [[{}]])[0].get('id', False)
+
             # get contact
             domain = []
             if data.get('contact_identifier'):
@@ -75,7 +69,6 @@ class AccountContactAPI(http.Controller):
 
     @http.route("/outbound/message", type="http", auth="none", methods=["POST"], csrf=False)
     def outbound_message(self, **data):
-        # request.env['res.partner'].sudo().with_user(1).fetch_and_create_profiles_from_trengo()
         ticket_object = request.env['trengo.ticket']
         profile_obj = request.env['res.partner']
 
@@ -171,8 +164,6 @@ class AccountContactAPI(http.Controller):
         ticket_id = ticket_object.sudo().search([('trengo_id', '=', int(data['ticket_id']))], limit=1)
         if ticket_id and label_id:
             ticket_id.label_ids = [(3, label_id.id, 0)]
-
-    #####################
 
     @http.route("/ticket/assigned", type="http", auth="none", methods=["POST"], csrf=False)
     def ticket_assigned(self, **data):
