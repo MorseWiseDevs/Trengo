@@ -7,7 +7,7 @@ from odoo import http, _
 
 class AccountContactAPI(http.Controller):
 
-    @http.route("/inbound/message", type="http", auth="user", methods=["POST"], csrf=False)
+    @http.route("/inbound/message", type="http", auth="none", methods=["POST"], csrf=False)
     def inbound_message(self, **data):
 
         ticket_object = request.env['trengo.ticket']
