@@ -1,7 +1,6 @@
 {
     "name": "Trengo Plugin",
-    'summary': "This app allows you to set up webhooks in Trengo to to receive messages and update tickets in Odoo",
-    'description':
+    'summary':
         """
 
         This app allows you to set up webhooks in Trengo to to receive messages and update tickets in Odoo
